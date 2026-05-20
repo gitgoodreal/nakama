@@ -1,7 +1,7 @@
 export async function onRequestGet(context) {
   const { request, env } = context;
 
-  const SITE_URL        = 'https://nakamashiptm1.pages.dev';
+  const SITE_URL        = 'https://nakama-c82.pages.dev';
   const REDIRECT_URI    = `${SITE_URL}/functions/auth`;
   const CLIENT_ID       = env.DISCORD_CLIENT_ID;
   const CLIENT_SECRET   = env.DISCORD_CLIENT_SECRET;
@@ -18,7 +18,6 @@ export async function onRequestGet(context) {
   }
 
   try {
-    // 1. Exchange code for access token
     const tokenRes = await fetch('https://discord.com/api/oauth2/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -38,7 +37,6 @@ export async function onRequestGet(context) {
       return Response.redirect(`${SITE_URL}/verify.html?error=token_failed`, 302);
     }
 
-    // 2. Get user's Discord ID
     const userRes = await fetch('https://discord.com/api/users/@me', {
       headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
@@ -50,13 +48,11 @@ export async function onRequestGet(context) {
       return Response.redirect(`${SITE_URL}/verify.html?error=user_fetch_failed`, 302);
     }
 
-    // 3. Assign Verified role
     await fetch(`https://discord.com/api/guilds/${GUILD_ID}/members/${user.id}/roles/${VERIFIED_ROLE}`, {
       method:  'PUT',
       headers: { Authorization: `Bot ${BOT_TOKEN}` },
     });
 
-    // 4. Remove Unverified role
     if (UNVERIFIED_ROLE) {
       await fetch(`https://discord.com/api/guilds/${GUILD_ID}/members/${user.id}/roles/${UNVERIFIED_ROLE}`, {
         method:  'DELETE',
