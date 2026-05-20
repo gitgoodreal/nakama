@@ -1129,7 +1129,7 @@
       const footer = document.getElementById("memberFooter");
 
       try {
-        const res = await fetch("/.netlify/functions/members");
+        const res = await fetch("/functions/members");
 
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
 
