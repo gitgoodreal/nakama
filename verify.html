@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NakamaShip™ // Verify</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background-color: #0a0e1a;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(15,40,80,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(100,30,10,0.4) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,0.08)'/%3E%3C/svg%3E");
+      background-size: cover, cover, 60px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Raleway', sans-serif;
+      color: #e8d5b0;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(15,25,50,0.95), rgba(8,15,35,0.98));
+      border: 1px solid rgba(180,130,60,0.35);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(180,130,60,0.08), inset 0 1px 0 rgba(255,220,100,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(180,130,60,0.7), transparent);
+    }
+
+    .luffy-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(180,130,60,0.5);
+      margin-bottom: 1.25rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .site-title {
+      font-family: 'Pirata One', cursive;
+      font-size: 1.8rem;
+      color: #f0c060;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .tagline {
+      font-size: 0.75rem;
+      color: rgba(232,213,176,0.5);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(180,130,60,0.25);
+      margin: 0 auto 1.75rem;
+      width: 60%;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f0d080;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.05em;
+    }
+
+    .sub {
+      font-size: 0.82rem;
+      color: rgba(232,213,176,0.6);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .verify-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #5865F2, #4752c4);
+      color: #fff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      width: 100%;
+    }
+
+    .verify-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .verify-btn:active { transform: scale(0.98); opacity: 1; }
+
+    .discord-icon {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+      flex-shrink: 0;
+    }
+
+    .status-msg {
+      margin-top: 1.25rem;
+      font-size: 0.82rem;
+      min-height: 1.2em;
+      color: rgba(232,213,176,0.55);
+    }
+
+    .status-msg.success { color: #5cb85c; }
+    .status-msg.error   { color: #e05c5c; }
+
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 0.7rem;
+      color: rgba(232,213,176,0.3);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <!-- Icon: nakamaship.jpg must be in same folder as verify.html -->
+  <img src="nakamaship.jpg" alt="NakamaShip" class="luffy-img" />
+
+  <div class="site-title">NakamaShip™</div>
+  <div class="tagline">Sail the Grand Line</div>
+
+  <hr class="divider" />
+
+  <h1>Crew Verification</h1>
+  <p class="sub">
+    Log in with Discord to prove you're a real nakama.<br />
+    Takes less than 10 seconds — no forms, no email.
+  </p>
+
+  <a id="verify-btn" class="verify-btn" href="#" onclick="startOAuth()">
+    <svg class="discord-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+    </svg>
+    Login with Discord
+  </a>
+
+  <div id="status" class="status-msg"></div>
+
+  <div class="footer-note">NakamaShip™ &nbsp;·&nbsp; Discord verification</div>
+</div>
+
+<script>
+  const CLIENT_ID    = '1506271284554764378';
+  const REDIRECT_URI = 'https://nakamashiptm1.pages.dev/functions/auth';
+  const SCOPE        = 'identify';
+
+  function startOAuth() {
+    const params = new URLSearchParams({
+      client_id:     CLIENT_ID,
+      redirect_uri:  REDIRECT_URI,
+      response_type: 'code',
+      scope:         SCOPE,
+    });
+    window.location.href = 'https://discord.com/api/oauth2/authorize?' + params.toString();
+  }
+
+  // Handle callback result query params (e.g. ?success=1 or ?error=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const statusEl  = document.getElementById('status');
+
+  if (urlParams.get('success') === '1') {
+    statusEl.textContent = '✓ Verified! You can close this tab and head back to Discord.';
+    statusEl.className   = 'status-msg success';
+    document.getElementById('verify-btn').style.display = 'none';
+  } else if (urlParams.get('error')) {
+    statusEl.textContent = 'Something went wrong: ' + decodeURIComponent(urlParams.get('error'));
+    statusEl.className   = 'status-msg error';
+  }
+</script>
+
+</body>
+</html>
