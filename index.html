@@ -1129,7 +1129,7 @@
       const footer = document.getElementById("memberFooter");
 
       try {
-        const res = await fetch("https://nakama-members.existslays.workers.dev");
+        const res = await fetch("/functions/members");
 
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
 
